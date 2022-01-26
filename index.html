@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Allison&family=Great+Vibes&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/app.css">
+        <title>Space Invaders</title>
+    </head>
+    
+    <body onkeyup="onKeyDown(event)" onload="init()">
+
+        <div class="background-container">
+            <div class="stars"></div>
+            <div class="twinkling"></div>
+            <div class="clouds"></div>
+        </div>
+        <h1>👽 Space Invaders 👽</h1>
+        <div class="hed">
+            <h2>Your score : <span class="score"></span></h2>
+            <h2>Super Shoots : <span class="super-shoot"></span></h2>
+            <h2>Neighbors Mode : <span class="negs-mode"></span></h2>
+            <h2>Lives : <span class="lives"></span></h2>
+        </div>
+       
+
+        
+        <table>
+            <tbody class="game-container">
+            </tbody>
+        </table>
+        <div class="msg-bord hide">
+           
+        </div>
+
+        <div class="levels">
+            <button class="button" onclick="levels(500,8,3,'beg',0,2)">Beginner</button>
+            <button class="button" onclick="levels(300,9,4,'med',0,3)">Medium</button>
+            <button class="button" onclick="levels(200,10,5,'ex',0,4)">Expert</button>
+    
+        </div>
+
+        <div class="starters">
+    
+        
+            <button class="button" onclick="startGame()">Start</button>
+            <button class="button" onclick="rules()">Directions</button>
+            <button class="button hide restart" onclick="restart()">Restart</button>
+            <button class="button " onclick="freeze()">freeze</button>
+       
+    
+    
+        </div>
+    
+    
+        
+        <div class="modal"></div>
+        <div class="rules"></div>
+    
+    
+         
+        <script src="js/game.js"></script>
+        <script src="js/alien.js"></script>
+        <script src="js/hero.js"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/msg.js"></script>
+    
+    </body>
+    
+    </html>
