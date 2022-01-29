@@ -1,34 +1,57 @@
 'use strict';
 
 const BOARD_SIZE = 14;
-const ALIENS_ROW_LENGTH = 8
-const ALIENS_ROW_COUNT = 3
+
 const HERO = '♆';
 const ALIEN = '👽';
 const LASER = '⤊';
+const SUPER_MODE_LASER = '|^|'
 const EMPTY = '';
-const STAR = '⭐';
+const CHERRY = '🍒';
 const SKY = 'sky';
 const EARTH = 'earth';
 
 // Matrix of cell objects. e.g.: {type: SKY, gameObject: ALIEN} 
 var gBoard;
-//  var gSuperMode = false
+
+
 var gGame = {
     isOn: false,
     aliensCount: 0,
     superMode: false,
-    freezeIsON: true
+    freezeIsON: true,
+    neboSoot: false,
+    superShootRemain: 3,
+    lives: 3
 }
+var gLavel = [{
+        speed: 3000,
+        aliensRowLength: 4,
+        aliensRowCount: 2
+
+    },
+    {
+        speed: 1000,
+        aliensRowLength: 8,
+        aliensRowCount: 3
+    },
+    {
+        speed: 500,
+        aliensRowLength: 10,
+        aliensRowCount: 4
+    }
+
+]
 var gScore = 0
 // Called when game loads 
 function init() {
     gBoard = createBoard()
     console.log('gBoard', gBoard)
     renderBoard(gBoard)
-    renderScore(gScore)
-    
+    renderTopBar()
+
 }
+var gAlienMoveInterval;
 // Create and returns the board with aliens on top, ground at bottom 
 // use the functions: createCell, createHero, createAliens 
 function createBoard() {
@@ -74,19 +97,33 @@ function createCell(gameObject = null) {
 }
 
 // position such as: {i: 2, j: 7} 
-function updateCell(pos, gameObject = null) {
+function updateCell(pos, gameObject = 'Bad') {
+    // console.log('updateCell \n pos',pos,' |gameObject',gameObject)
     gBoard[pos.i][pos.j].gameObject = gameObject;
     var elCell = getElCell(pos);
-    elCell.innerHTML = gameObject || '';
+    elCell.innerHTML = gameObject
+    // || '';
 }
 
+var cheryInterval ;
 function startGame() {
     gGame.isOn = true
-    gGame.freezeIsON =false
+    gGame.freezeIsON = false
+    gAlienMoveInterval = setInterval(
+        function () {
+            if (!gGame.isOn || gGame.freezeIsON) return
+            moveAliens()
+
+        }, gAliens.alienSpeed);
+cheryInterval =     setInterval(getCandys, 10000);
+    // moveAliens()
 }
 
-function renderScore(score) {
-    document.querySelector(".score").innerHTML = score
+function renderTopBar() {
+    document.querySelector(".score").innerHTML = gScore
+    document.querySelector(".super-shoot").innerHTML = gGame.superShootRemain
+    document.querySelector(".lives").innerHTML = gGame.lives
+
 }
 
 
@@ -94,27 +131,52 @@ function renderScore(score) {
 function gameOver() {
     if (gGame.aliensCount === 0) {
         gGame.isOn = false
-        renderMsg(msgData[0].msgContentEN)
+        messageSelect(2)
         show(".restart")
         return true
     }
 }
 
-function restart(){
+function gameOver2(bool) {
+    if (bool) {
+        //lose
+        gGame.isOn = false
+        messageSelect(1)
+        show(".restart")
+        return true
+
+    }
+}
+
+
+
+
+function restart() {
     gScore = 0
-    gGame.superMode = false
+    gGame = {
+        isOn: false,
+        aliensCount: 0,
+        superMode: false,
+        freezeIsON: true,
+        neboSoot: false,
+        superShootRemain: 3,
+        lives: 3
+    }
     msgIsOn = false
     hide(".msg-bord")
     init()
 
 }
-function freeze(){
-if(gGame.freezeIsON){
-    gGame.freezeIsON =false
-}else{
-    gGame.freezeIsON = true
-}
-console.log('freeze',gGame.freezeIsON)
+
+function freeze() {
+    if (gGame.freezeIsON) {
+
+        gGame.freezeIsON = false
+    } else {
+        gGame.freezeIsON = true
+        clearInterval()
+    }
+    console.log('freeze', gGame.freezeIsON)
 }
 
 function rules() {
@@ -122,7 +184,26 @@ function rules() {
         msgIsOn = false
         hide(".msg-bord")
     } else {
-        renderMsg(msgData[1].msgContentEN)
+        // renderMsg(msgData[1].msgContentEN)
+        messageSelect(4)
     }
 
 }
+
+function lavelOnClick(arryPlace) {
+    gAliens.alienSpeed = gLavel[arryPlace].speed
+    gAliens.aliensRowCount = gLavel[arryPlace].aliensRowCount
+    gAliens.aliensRowLength = gLavel[arryPlace].aliensRowLength
+        restart()
+    }
+// aliensRowLength: 4,
+// aliensRowCount: 2
+
+function getCandys(pos){
+        var randLocation = getRowRandomEmptyCell(gBoard);
+        if (!randLocation) return;
+        updateCell({ i: randLocation.i, j: randLocation.j }, CHERRY);
+        setTimeout(function () {
+            updateCell({ i: randLocation.i, j: randLocation.j }, EMPTY);
+        }, 5000);
+    }

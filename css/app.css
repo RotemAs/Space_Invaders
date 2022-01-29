@@ -1,25 +1,25 @@
-
 body {
   text-align: center;
-  background-color: rgb(96, 163, 226);
-  color:white;
+  background-color: rgb(3, 27, 49);
+  color: white;
 }
 
 table {
   /* border-collapse: collapse; */
-/* table-layout: fixed ; */
-/* text-align: center; */
-margin-left: auto;
+  /* table-layout: fixed ; */
+  /* text-align: center; */
+  margin-left: auto;
   margin-right: auto;
 
 }
 
 .game-container {
   border: 1px solid black;
-  
+
 }
+
 .sky {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 22px;
   height: 22px;
 }
@@ -32,19 +32,25 @@ margin-left: auto;
   /* background-color: rgb(53, 22, 228) */
 }
 
+.earth {
+  background-color: lightcoral;
+  width: 22px;
+  height: 22px;
+}
+
 h1 {
   margin-top: 0px;
   margin: auto;
-    color: gold;
-    /* color: rgb(102, 104, 221); */
-    background-color: rgb(102, 104, 221);
+  color: gold;
+  /* color: rgb(102, 104, 221); */
+  background-color: rgb(102, 104, 221);
   /* float:right; */
   text-shadow: 0px -4px 10px #e99b0a;
 }
 
 h2 {
   /* position: absolute; */
-    text-align: center;
+  text-align: center;
   margin: auto;
   /* margin-top: 50px; */
   padding: 5px;
@@ -55,7 +61,7 @@ h2 {
   background-color: rgb(102, 104, 221);
 }
 
-.msg-bord{
+.msg-bord {
   display: inline-block;
   padding: 15px 25px;
   font-size: 24px;
@@ -63,13 +69,14 @@ h2 {
   text-align: center;
   text-decoration: none;
   outline: none;
-  color: #666;
+  color: rgb(253, 251, 251);
   background-color: rgb(38, 212, 235);
   border: none;
   border-radius: 15px;
   box-shadow: 0 9px #999;
   margin: 8px;
 }
+
 .button {
   display: inline-block;
   padding: 15px 25px;
@@ -95,4 +102,3 @@ h2 {
 .hide {
   display: none;
 }
-
