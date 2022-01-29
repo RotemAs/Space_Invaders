@@ -192,12 +192,15 @@ function rules() {
 
 function lavelOnClick(arryPlace) {
     gAliens.alienSpeed = gLavel[arryPlace].speed
-    gAliens.aliensRowCount = gLavel[arryPlace].aliensRowCount
     gAliens.aliensRowLength = gLavel[arryPlace].aliensRowLength
+    gAliens.aliensRowCount = gLavel[arryPlace].aliensRowCount
+    gAliens.gAliensTop = 0
+    gAliens.gAliensBottom = gLavel[arryPlace].aliensRowCount -1
+    gAliens.alienJStart =  0,
+    gAliens.alienJEnds =  gLavel[arryPlace].aliensRowCount -1
         restart()
     }
-// aliensRowLength: 4,
-// aliensRowCount: 2
+    
 
 function getCandys(pos){
         var randLocation = getRowRandomEmptyCell(gBoard);

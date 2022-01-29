@@ -2,7 +2,7 @@
 
 
 var gAliens = {
-    alienSpeed: 650,
+    alienSpeed: 950,
     aliensRowLength: 8,
     aliensRowCount: 3,
     gAliensTop: 0,
